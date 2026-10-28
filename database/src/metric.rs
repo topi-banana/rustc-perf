@@ -24,6 +24,10 @@ pub enum Metric {
     InstructionsUser,
     #[serde(rename = "max-rss")]
     MaxRSS,
+    #[serde(rename = "allocations")]
+    Allocations,
+    #[serde(rename = "allocated-bytes")]
+    AllocatedBytes,
     #[serde(rename = "task-clock")]
     TaskClock,
     #[serde(rename = "task-clock:u")]
@@ -89,6 +93,8 @@ impl Metric {
             Metric::FaultsUser => "faults:u",
             Metric::InstructionsUser => "instructions:u",
             Metric::MaxRSS => "max-rss",
+            Metric::Allocations => "allocations",
+            Metric::AllocatedBytes => "allocated-bytes",
             Metric::TaskClock => "task-clock",
             Metric::TaskClockUser => "task-clock:u",
             Metric::WallTime => "wall-time",

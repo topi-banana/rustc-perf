@@ -49,6 +49,15 @@ fn run_with_determinism_env(mut cmd: Command) {
 // We want each rustc execution to have a separate self-profile directory,
 // to avoid overwriting the results. PID of this process and timestamp should
 // hopefully be unique enough.
+fn allocator_tracker_path() -> Option<PathBuf> {
+    if !cfg!(target_os = "linux") {
+        return None;
+    }
+    let exe_dir = env::current_exe().ok()?.parent()?.to_path_buf();
+    let path = exe_dir.join("liballocator_tracker.so");
+    if path.exists() { Some(path) } else { None }
+}
+
 fn create_self_profile_dir() -> PathBuf {
     let pid = std::process::id();
     let timestamp = SystemTime::now()
@@ -125,9 +134,12 @@ fn main() {
                     .arg("1")
                     .arg("setarch")
                     .arg(std::env::consts::ARCH)
-                    .arg("-R")
-                    .arg(&tool)
-                    .args(&args);
+                    .arg("-R");
+                if let Some(tracker) = allocator_tracker_path() {
+                    cmd.arg("env");
+                    cmd.arg(format!("LD_PRELOAD={}", tracker.display()));
+                }
+                cmd.arg(&tool).args(&args);
 
                 let prof_out_dir = create_self_profile_dir();
                 if wrapper == "PerfStatSelfProfile" {

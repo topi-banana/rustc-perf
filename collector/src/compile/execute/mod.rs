@@ -744,6 +744,24 @@ fn process_stat_output(
             );
             continue;
         }
+        if let Some(stripped) = line.strip_prefix("!allocations:") {
+            stats.insert(
+                "allocations".into(),
+                stripped
+                    .parse()
+                    .map_err(|e| DeserializeStatError::ParseError(stripped.to_string(), e))?,
+            );
+            continue;
+        }
+        if let Some(stripped) = line.strip_prefix("!allocated-bytes:") {
+            stats.insert(
+                "allocated-bytes".into(),
+                stripped
+                    .parse()
+                    .map_err(|e| DeserializeStatError::ParseError(stripped.to_string(), e))?,
+            );
+            continue;
+        }
 
         // The rest of the loop body handles processing output from the Linux `perf` tool
         // so on Windows, we just skip it and go to the next line.

@@ -30,6 +30,16 @@ export const importantCompileMetrics: MetricDescription[] = [
     description: "Peak memory usage (resident set size)",
   },
   {
+    label: "Allocations",
+    metric: "allocations",
+    description: "Number of heap allocations",
+  },
+  {
+    label: "Allocated bytes",
+    metric: "allocated-bytes",
+    description: "Total bytes allocated",
+  },
+  {
     label: "Binary size",
     metric: "size:linked_artifact",
     description: "Size of the generated binary artifact",

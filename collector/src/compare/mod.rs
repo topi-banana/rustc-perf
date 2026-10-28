@@ -18,6 +18,8 @@ static ALL_METRICS: &[Metric] = &[
     Metric::CyclesUser,
     Metric::WallTime,
     Metric::MaxRSS,
+    Metric::Allocations,
+    Metric::AllocatedBytes,
     Metric::LinkedArtifactSize,
     Metric::AssemblyFileSize,
     Metric::BranchMisses,

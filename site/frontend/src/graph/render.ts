@@ -339,6 +339,14 @@ export function renderPlots(
           yAxis = "Maximum resident set size";
           yAxisUnit = "kB";
           break;
+        case "allocations":
+          yAxis = "Heap allocations";
+          yAxisUnit = "count";
+          break;
+        case "allocated-bytes":
+          yAxis = "Allocated bytes";
+          yAxisUnit = "bytes";
+          break;
         case "faults":
           yAxis = "Faults";
           yAxisUnit = "count";
@@ -452,6 +460,15 @@ export function renderRuntimePlots(
         yAxis = "Maximum resident set size";
         yAxisUnit = "kB";
         break;
+      case "allocations":
+        yAxis = "Heap allocations";
+        yAxisUnit = "count";
+        break;
+      case "allocated-bytes":
+        yAxis = "Allocated bytes";
+        yAxisUnit = "bytes";
+        break;
+
       case "faults":
         yAxis = "Faults";
         yAxisUnit = "count";

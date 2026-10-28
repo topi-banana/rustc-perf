@@ -1,5 +1,5 @@
 [workspace]
-members = ["collector", "collector/benchlib", "site", "database", "intern"]
+members = ["collector", "collector/benchlib", "site", "database", "intern", "allocator-tracker"]
 exclude = ["rust/src"]
 resolver = "2"
 
